@@ -29,12 +29,13 @@ class SecondViewController: UIViewController {
         remarkView?.isUserInteractionEnabled = false
         
         if self.itemModel != nil {
+            self.title = self.itemModel?.name
+            
             self.nameField?.text = self.itemModel?.name
             self.emailField?.text = self.itemModel?.email
             self.balanceField?.text = self.itemModel?.balance
             
             let url = URL(string: (self.itemModel?.picture)!)
-            
             self.imageView?.kf.setImage(
                 with: url,
                 placeholder: #imageLiteral(resourceName: "placeholder"),

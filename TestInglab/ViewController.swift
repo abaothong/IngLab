@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.title = "Developer"
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
         
@@ -37,7 +37,6 @@ extension ViewController{
     func callApi() {
         let url: String = "https://api.myjson.com/bins/a9eh1"
         Alamofire.request(url).responseJSON { (response) in
-            // print data
             guard response.result.isSuccess else {
                 //do error checking
                 return
@@ -47,8 +46,7 @@ extension ViewController{
                 print(result)
                 self.itemArray = ItemModel.parse(data: result)
                 self.displayItemArray = self.itemArray.filter{$0.isActive == true}
-                self.displayItemArray.sorted(by: { $0.index > $1.index })
-                
+                self.displayItemArray.sort(by: { $0.index < $1.index })
                 self.tableView?.reloadData()
             }
             
